@@ -29,15 +29,20 @@ namespace Sloane
         Vector2Int m_ThreadNum;
         public ComputeShaderPass(ComputeShader computeShader, string kernelName, string profilingName, int numX = 8, int numY = 8, Action<CommandBuffer, RenderingData, ComputeShader> callbackBeforeDispatch = null, Action<CommandBuffer, RenderingData, ComputeShader> callbackAfterDispatch = null)
         {
-            m_ComputeShader = computeShader;
-            m_ComputeShaderKernelIndex = m_ComputeShader.FindKernel(kernelName);
-            m_ProfilingSampler = new ProfilingSampler(profilingName);
-            m_SourceBuffers = new List<ShaderInputBuffer>();
+            try {
+				m_ComputeShader = computeShader;
+				m_ComputeShaderKernelIndex = m_ComputeShader.FindKernel(kernelName);
+				m_ProfilingSampler = new ProfilingSampler(profilingName);
+				m_SourceBuffers = new List<ShaderInputBuffer>();
 
-            m_CallbackBeforeDispatch = callbackBeforeDispatch;
-            m_CallbackAfterDispatch = callbackAfterDispatch;
+				m_CallbackBeforeDispatch = callbackBeforeDispatch;
+				m_CallbackAfterDispatch = callbackAfterDispatch;
 
-            m_ThreadNum = new Vector2Int(numX, numY);
+				m_ThreadNum = new Vector2Int(numX, numY);
+			}
+            catch (Exception e) {
+                Debug.LogException(e);
+            }
         }
 
         public void SetTargetBuffer(int name, RenderTexture buffer)

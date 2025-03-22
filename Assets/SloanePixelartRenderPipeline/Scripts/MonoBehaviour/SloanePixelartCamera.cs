@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Sloane;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
@@ -107,7 +106,7 @@ namespace Sloane
             {
                 m_ThisCamera = GetComponent<Camera>();
                 m_ThisCameraData = m_ThisCamera.GetComponent<UniversalAdditionalCameraData>();
-                if (m_ThisCameraData == null) m_ThisCameraData = m_ThisCamera.AddComponent<UniversalAdditionalCameraData>();
+                if (m_ThisCameraData == null) m_ThisCameraData = m_ThisCamera.gameObject.AddComponent<UniversalAdditionalCameraData>();
             }
 
             m_ThisCamera.clearFlags = CameraClearFlags.Nothing;
@@ -286,7 +285,7 @@ namespace Sloane
                 m_CastCamera = castCameraObject.AddComponent<SloanePixelartCastCamera>();
                 m_CastCamera.Initialize();
                 m_CastCameraData = m_CastCamera.GetComponent<UniversalAdditionalCameraData>();
-                if (m_CastCameraData == null) m_CastCameraData = m_CastCamera.AddComponent<UniversalAdditionalCameraData>();
+                if (m_CastCameraData == null) m_CastCameraData = m_CastCamera.gameObject.AddComponent<UniversalAdditionalCameraData>();
                 m_CastCamera.Camera.orthographicSize = 6.125f;    // Celeste
             }
 
